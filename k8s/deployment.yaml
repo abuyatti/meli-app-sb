@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meli-app-deploy
+  labels:
+    name: meli-app-deploy
+    app: meli-app
+spec:
+  template:
+    metadata:
+      name: meli-app-pod
+      labels:
+        name: meli-app-pod
+        app: meli-app
+    spec:
+      containers:
+        - name: meli-app-sb
+          image: abuyatti/meli-app-sb:v1
+          ports:
+            - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      name: meli-app-pod
+      app: meli-app
